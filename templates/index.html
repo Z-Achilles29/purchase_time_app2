@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Time Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <h1>Purchase Time Predictor</h1>
+    <p>Predict when customers will make a purchase</p>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+    <!-- LEFT CARD : INPUTS -->
+    <div class="card">
+        <h2>Session Data</h2>
+
+        <form method="POST" id="predictForm">
+
+                    <label>
+            Total Actions in Session:
+            <span id="te_val">{{ inputs.total_events }}</span>
+        </label>
+        <small class="help-text">
+            Total number of interactions such as clicks, views, and cart actions.
+        </small>
+        <input type="range" min="0" max="20"
+            id="total_events"
+            name="total_events"
+            value="{{ inputs.total_events }}"
+            oninput="updateValue('te_val', this.value)">
+
+
+        <label>
+            Items Added to Cart:
+            <span id="ac_val">{{ inputs.add_to_cart_events }}</span>
+        </label>
+        <small class="help-text">
+            How many times the customer added products to the cart.
+        </small>
+        <input type="range" min="0" max="10"
+            id="add_to_cart_events"
+            name="add_to_cart_events"
+            value="{{ inputs.add_to_cart_events }}"
+            oninput="updateValue('ac_val', this.value)">
+
+
+        <label>
+            Products Viewed:
+            <span id="pv_val">{{ inputs.page_view_events }}</span>
+        </label>
+        <small class="help-text">
+            Number of product pages the customer explored.
+        </small>
+        <input type="range" min="0" max="15"
+            id="page_view_events"
+            name="page_view_events"
+            value="{{ inputs.page_view_events }}"
+            oninput="updateValue('pv_val', this.value)">
+
+
+        <label>
+            Estimated Order Value ($):
+            $<span id="amt_val">{{ inputs.total_amount_usd }}</span>
+        </label>
+        <small class="help-text">
+            Approximate value of products currently in the cart.
+        </small>
+        <input type="range" min="0" max="3000" step="10"
+            id="total_amount_usd"
+            name="total_amount_usd"
+            value="{{ inputs.total_amount_usd }}"
+            oninput="updateValue('amt_val', this.value)">
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- QUICK TEST SCENARIOS -->
+        <div class="quick">
+            <p>Quick Test Scenarios:</p>
+            <div class="buttons">
+                <button type="button" onclick="setScenario('low')">Low Intent</button>
+                <button type="button" onclick="setScenario('medium')">Medium Intent</button>
+                <button type="button" onclick="setScenario('high')">High Intent</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT CARD : RESULTS -->
+    <div class="card">
+        <h2>Prediction Result</h2>
+
+        {% if prediction is not none %}
+        <div class="result-box">
+            <div class="time">{{ prediction }}</div>
+            <div class="unit">hours</div>
+
+            <p class="friendly-time">
+                {{ readable }} &nbsp; (± {{ uncertainty }} minutes)
+            </p>
+
+            <div class="intent-badge">
+                {{ intent }}
+            </div>
+
+            <div class="confidence">
+                Prediction Confidence:
+                <strong>{{ confidence }}</strong>
+            </div>
+
+            <p class="action-text">
+                {{ action }}
+            </p>
+        </div>
+
+
+
+        <div class="stats">
+            <div>
+                <span>Events</span>
+                <strong>{{ inputs.total_events }}</strong>
+            </div>
+            <div>
+                <span>Cart Actions</span>
+                <strong>{{ inputs.add_to_cart_events }}</strong>
+            </div>
+            <div>
+                <span>Page Views</span>
+                <strong>{{ inputs.page_view_events }}</strong>
+            </div>
+            <div>
+                <span>Amount</span>
+                <strong>${{ inputs.total_amount_usd }}</strong>
+            </div>
+        </div>
+        {% else %}
+        <p class="placeholder">
+            Run a prediction to see results.
+        </p>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    E-Commerce Purchase Time Prediction System
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+function updateValue(id, value) {
+    document.getElementById(id).innerText = value;
+}
+
+function setScenario(type) {
+
+    if (type === "low") {
+        total_events.value = 3;
+        add_to_cart_events.value = 2;
+        page_view_events.value = 4;
+        total_amount_usd.value = 50;
+    }
+
+    if (type === "medium") {
+        total_events.value = 8;
+        add_to_cart_events.value = 4;
+        page_view_events.value = 5;
+        total_amount_usd.value = 200;
+    }
+
+    if (type === "high") {
+        total_events.value = 15;
+        add_to_cart_events.value = 6;
+        page_view_events.value = 8;
+        total_amount_usd.value = 600;
+    }
+
+    // Update visible values
+    updateValue("te_val", total_events.value);
+    updateValue("ac_val", add_to_cart_events.value);
+    updateValue("pv_val", page_view_events.value);
+    updateValue("amt_val", total_amount_usd.value);
+
+    // Auto-submit for instant prediction (demo-friendly)
+    document.getElementById("predictForm").submit();
+}
+</script>
+
+</body>
+</html>

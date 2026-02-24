@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #6f78d6, #7b5fc3);
+    color: #333;
+}
+
+.header {
+    text-align: center;
+    padding: 40px 20px;
+    color: white;
+}
+
+.container {
+    display: flex;
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    width: 50%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    color: #6f78d6;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+input[type=range] {
+    width: 100%;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #6f78d6;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #5c64c4;
+}
+
+.quick {
+    margin-top: 25px;
+}
+
+.quick .buttons button {
+    width: auto;
+    margin-right: 10px;
+    padding: 6px 14px;
+    font-size: 13px;
+}
+
+.result-box {
+    background: #eef1f8;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+}
+
+.time {
+    font-size: 56px;
+    font-weight: bold;
+    color: #6f78d6;
+}
+
+.unit {
+    font-size: 18px;
+    color: #666;
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stats div {
+    background: #f7f8fc;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+
+.stats span {
+    display: block;
+    font-size: 13px;
+    color: #666;
+}
+
+.stats strong {
+    font-size: 18px;
+    color: #6f78d6;
+}
+
+.placeholder {
+    color: #777;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.footer {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    font-size: 14px;
+}
+.friendly-time {
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+.intent-badge {
+    margin-top: 12px;
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    background: #eef1f8;
+    color: #6f78d6;
+}
+
+.action-text {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #444;
+}
+
+.confidence {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #444;
+}
+
+.confidence strong {
+    color: #6f78d6;
+}
