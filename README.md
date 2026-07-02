@@ -17,7 +17,6 @@ The complete workflow includes data preprocessing, exploratory data analysis (ED
 * Generate business insights from customer transaction data.
 
 ---
-
 ## 📂 Dataset
 
 The dataset contains customer transaction records with features such as:
@@ -31,7 +30,7 @@ The dataset contains customer transaction records with features such as:
 * Customer Location
 * Previous Purchase History
 
+academic project
 > **Note:** The dataset used in this project is intended for educational and portfolio purposes.
-
 ---
 
