@@ -1,5 +1,7 @@
+# importing the required libraries
 from flask import Flask, render_template, request
 import joblib
+import pandas as pd
 import numpy as np
 #using flask API
 
